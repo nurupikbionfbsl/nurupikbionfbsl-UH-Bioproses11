@@ -23,7 +23,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Supabase JS Client -->
+    <!-- Supabase JS SDK (v2) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-teal-500 selection:text-white">
@@ -174,7 +174,7 @@
 
                     <!-- GRID BUTTONS -->
                     <div id="question-grid" class="grid grid-cols-5 gap-2 max-h-[360px] overflow-y-auto p-1">
-                        <!-- 35 Grid buttons generated via JS -->
+                        <!-- Grid buttons generated via JS -->
                     </div>
 
                     <!-- LEGEND -->
@@ -384,7 +384,7 @@
                     </button>
                 </div>
             </form>
-            <p class="text-[11px] text-center text-slate-400">Default Password: <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-bold">guru123</code></p>
+            <p class="text-[11px] text-center text-slate-400">Default Password: <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-bold">*******</code></p>
         </div>
     </div>
 
@@ -415,7 +415,7 @@
 
     <!-- CONFIRM SUBMIT MODAL -->
     <div id="modal-submit" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 text-slate-800 animate-fade-in">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 text-slate-800">
             <div class="text-center">
                 <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
                     <i class="fa-solid fa-triangle-exclamation"></i>
@@ -451,10 +451,9 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         /* ==========================================================================
-           1. DATA SOAL LENGKAP (35 BUTIR) Sesuai Dokumen Upload
+           1. DATA SOAL LENGKAP (35 BUTIR)
            ========================================================================== */
         const questions = [
-            // --- BAGIAN I: PILIHAN GANDA (1-20) ---
             {
                 id: 1,
                 type: 'PG',
@@ -535,24 +534,18 @@
                 question: 'Perhatikan gambar kerja enzim di bawah ini!<br>' +
                     '<div class="my-4 flex justify-center bg-white p-3 rounded-lg border border-slate-200">' +
                     '<svg viewBox="0 0 500 160" class="w-full max-w-lg h-auto">' +
-                    '<!-- Enzim -->' +
                     '<path d="M 20 120 C 20 60, 60 50, 80 50 C 90 50, 95 70, 105 70 C 115 70, 120 50, 130 50 C 150 50, 180 60, 180 120 Z" fill="#93C5FD" stroke="#1D4ED8" stroke-width="2"/>' +
-                    '<!-- Arrow pointing to X -->' +
-                    '<line x1="105" y1="145" x2="105" y2="80" stroke="#DC2626" stroke-width="3" marker-end="url(#arrow)"/>' +
+                    '<line x1="105" y1="145" x2="105" y2="80" stroke="#DC2626" stroke-width="3"/>' +
                     '<text x="105" y="158" text-anchor="middle" font-weight="bold" fill="#DC2626" class="text-sm">X</text>' +
-                    '<!-- Substrat -->' +
                     '<path d="M 82 20 C 82 45, 92 48, 105 48 C 118 48, 128 45, 128 20 Z" fill="#4ADE80" stroke="#15803D" stroke-width="2"/>' +
                     '<text x="105" y="15" text-anchor="middle" class="text-xs font-bold fill-slate-700">Substrat</text>' +
                     '<text x="50" y="100" class="text-xs font-bold fill-blue-900">Enzim</text>' +
-                    '<!-- Arrow process -->' +
-                    '<path d="M 200 80 L 240 80" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>' +
-                    '<!-- Kompleks -->' +
+                    '<path d="M 200 80 L 240 80" stroke="#475569" stroke-width="3"/>' +
                     '<g transform="translate(180, 20)">' +
                     '<path d="M 80 100 C 80 40, 120 30, 140 30 C 150 30, 155 50, 165 50 C 175 50, 180 30, 190 30 C 210 30, 240 40, 240 100 Z" fill="#93C5FD" stroke="#1D4ED8" stroke-width="2"/>' +
                     '<path d="M 142 32 C 142 48, 152 50, 165 50 C 178 50, 188 48, 188 32 Z" fill="#4ADE80" stroke="#15803D" stroke-width="2"/>' +
                     '<text x="160" y="130" text-anchor="middle" class="text-xs font-bold fill-slate-700">Kompleks Enzim-Substrat</text>' +
                     '</g>' +
-                    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker></defs>' +
                     '</svg></div>' +
                     'Bagian yang diberi tanda <b>X</b> merupakan ....',
                 options: [
@@ -629,14 +622,11 @@
                     '<div class="my-4 flex justify-center bg-white p-3 rounded-lg border border-slate-200">' +
                     '<svg viewBox="0 0 400 200" class="w-full max-w-md h-auto">' +
                     '<ellipse cx="200" cy="100" rx="170" ry="80" fill="#22C55E" opacity="0.3" stroke="#15803D" stroke-width="3"/>' +
-                    '<!-- Grana Stacks (1 & 3) -->' +
                     '<g fill="#166534" stroke="#14532D">' +
                     '<rect x="100" y="70" width="40" height="12" rx="3"/><rect x="100" y="86" width="40" height="12" rx="3"/><rect x="100" y="102" width="40" height="12" rx="3"/><rect x="100" y="118" width="40" height="12" rx="3"/>' +
                     '<rect x="240" y="60" width="40" height="12" rx="3"/><rect x="240" y="76" width="40" height="12" rx="3"/><rect x="240" y="92" width="40" height="12" rx="3"/><rect x="240" y="108" width="40" height="12" rx="3"/><rect x="240" y="124" width="40" height="12" rx="3"/>' +
                     '</g>' +
-                    '<!-- Stroma (4) -->' +
                     '<text x="190" y="145" class="text-sm font-bold fill-slate-800">4 (Stroma)</text>' +
-                    '<!-- Labels -->' +
                     '<text x="120" y="55" class="text-xs font-bold fill-emerald-900">1 (Grana)</text>' +
                     '<text x="260" y="45" class="text-xs font-bold fill-emerald-900">2 (Tilakoid)</text>' +
                     '<text x="70" y="110" class="text-xs font-bold fill-emerald-900">3</text>' +
@@ -815,7 +805,6 @@
                     '<svg viewBox="0 0 400 180" class="w-full max-w-md h-auto">' +
                     '<rect x="40" y="30" width="320" height="120" rx="60" fill="#F97316" opacity="0.3" stroke="#C2410C" stroke-width="3"/>' +
                     '<path d="M 70 90 C 90 50, 110 130, 140 90 C 170 50, 200 130, 230 90 C 260 50, 290 130, 330 90" fill="none" stroke="#EA580C" stroke-width="4"/>' +
-                    '<!-- Labels -->' +
                     '<text x="50" y="25" class="text-xs font-bold fill-slate-800">1 (Membran Luar)</text>' +
                     '<text x="280" y="25" class="text-xs font-bold fill-slate-800">2 (Membran Dalam)</text>' +
                     '<text x="200" y="100" text-anchor="middle" class="text-sm font-bold fill-amber-900">3 (Matriks)</text>' +
@@ -1073,21 +1062,20 @@
         ];
 
         /* ==========================================================================
-           2. STATE MANAGEMENT & SUPABASE DATABASE
+           2. SUPABASE CONFIGURATION & STATE MANAGEMENT
            ========================================================================== */
+        const SUPABASE_URL = 'https://uabqumglcxxydsapmvtl.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhYnF1bWdsY3h4eWRzYXBtdnRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExMzIzNzcsImV4cCI6MjEwNjcwODM3N30.x-Bf6_mFBaL78Tg2HV85nqBJgXuqwxxh5eE05KflKbw';
         const STORAGE_KEY = 'biologi_xi_bioproses_sel_exam_attempt_v1';
         const TEACHER_PASSWORD_KEY = 'guru123';
         
-        const SUPABASE_URL = 'https://uabqumglcxxydsapmvtl.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhYnF1bWdsY3h4eWRzYXBtdnRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExMzIzNzcsImV4cCI6MjEwNjcwODM3N30.x-Bf6_mFBaL78Tg2HV85nqBJgXuqwxxh5eE05KflKbw';
-        let supabase = null;
-
+        let supabaseClient = null;
         let studentData = { name: '', class: '', no: '' };
-        let userAnswers = {}; // { qId: 'A' or ['A','B'] }
-        let userFlags = {}; // { qId: true/false }
+        let userAnswers = {};
+        let userFlags = {};
         let currentQuestionIndex = 0;
         let timerInterval = null;
-        let timeLeftSeconds = 90 * 60; // 90 menit
+        let timeLeftSeconds = 90 * 60;
 
         let allSubmissions = [];
         let isTeacherLoggedIn = false;
@@ -1103,18 +1091,16 @@
         async function initSupabase() {
             try {
                 if (window.supabase) {
-                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                     await fetchSubmissions();
 
-                    // Realtime Listener pada tabel submissions
-                    supabase
+                    // Real-time subscription untuk tabel submissions
+                    supabaseClient
                         .channel('public:submissions')
                         .on('postgres_changes', { event: '*', schema: 'public', table: 'submissions' }, () => {
                             fetchSubmissions();
                         })
                         .subscribe();
-                } else {
-                    console.warn("Supabase SDK tidak terisi.");
                 }
             } catch (err) {
                 console.error("Inisialisasi Supabase gagal:", err);
@@ -1122,15 +1108,33 @@
         }
 
         async function fetchSubmissions() {
-            if (!supabase) return;
-            const { data, error } = await supabase.from('submissions').select('*');
-            if (error) {
-                console.error("Gagal mengambil data submissions:", error);
-                return;
-            }
-            allSubmissions = data || [];
-            if (isTeacherLoggedIn) {
-                renderTeacherDashboard();
+            if (!supabaseClient) return;
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('submissions')
+                    .select('*');
+
+                if (error) {
+                    console.error("Gagal mengambil data dari Supabase:", error);
+                    return;
+                }
+
+                if (data) {
+                    allSubmissions = data.map(item => ({
+                        docId: item.id,
+                        studentData: item.student_data || item.studentData,
+                        userAnswers: item.user_answers || item.userAnswers,
+                        scores: item.scores,
+                        submittedAt: item.submitted_at || item.submittedAt
+                    }));
+
+                    if (isTeacherLoggedIn) {
+                        renderTeacherDashboard();
+                    }
+                }
+            } catch (err) {
+                console.error("Error fetchSubmissions:", err);
             }
         }
 
@@ -1159,22 +1163,20 @@
                 return;
             }
 
-            // Check if student already submitted online
             const existing = allSubmissions.find(s => 
                 s.studentData && 
                 s.studentData.class === studentData.class && 
-                s.studentData.no.toString() === studentData.no.toString()
+                s.studentData.no === studentData.no
             );
 
             if (existing) {
-                if (confirm(`Siswa ${existing.studentData.name} (Kelas ${existing.studentData.class}, Absen ${existing.studentData.no}) sudah pernah mengerjakan ujian ini dengan skor ${existing.scores?.totalScore || 0}.\n\nKlik OK untuk melihat hasil pengerjaan Anda.`)) {
+                if (confirm(`Siswa ${existing.studentData.name} (Kelas ${existing.studentData.class}, Absen ${existing.studentData.no}) sudah pernah mengerjakan ujian ini dengan skor ${existing.scores?.totalScore || 0}.\n\nKlik OK untuk melihat hasil pengerjaan.`)) {
                     userAnswers = existing.userAnswers || {};
                     showResults(existing.scores || { totalScore: 0 });
                 }
                 return;
             }
 
-            // Update Header UI
             document.getElementById('user-display-name').textContent = studentData.name;
             document.getElementById('user-display-class').textContent = studentData.class;
             document.getElementById('user-display-no').textContent = 'Absen: ' + studentData.no;
@@ -1182,13 +1184,11 @@
             document.getElementById('timer-box').classList.remove('hidden');
             document.getElementById('timer-box').classList.add('flex');
 
-            // Switch Screen
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-teacher').classList.add('hidden');
             document.getElementById('screen-exam').classList.remove('hidden');
             document.getElementById('screen-exam').classList.add('grid');
 
-            // Render Palette & First Question
             renderGrid();
             renderQuestion(0);
             startTimer();
@@ -1217,15 +1217,12 @@
             currentQuestionIndex = index;
             const q = questions[index];
 
-            // Update Header Badges
             document.getElementById('q-number-badge').textContent = `Soal #${q.id}`;
             document.getElementById('q-type-badge').textContent = q.section;
             document.getElementById('q-points').textContent = `${q.points} Poin`;
 
-            // Question Text
             document.getElementById('q-content').innerHTML = q.question;
 
-            // Render Choices
             const optionsContainer = document.getElementById('q-options');
             optionsContainer.innerHTML = '';
 
@@ -1270,14 +1267,12 @@
                 });
             }
 
-            // Update Button States
             document.getElementById('btn-prev').disabled = index === 0;
             document.getElementById('btn-prev').classList.toggle('opacity-50', index === 0);
             
             document.getElementById('btn-next').disabled = index === questions.length - 1;
             document.getElementById('btn-next').classList.toggle('opacity-50', index === questions.length - 1);
 
-            // Flag Button State
             const isFlagged = userFlags[q.id];
             const btnFlag = document.getElementById('btn-flag');
             if (isFlagged) {
@@ -1399,42 +1394,29 @@
             closeSubmitModal();
             clearInterval(timerInterval);
 
-            // Calculate Scores
-            let scorePG = 0;   // max 60 (20 x 3)
-            let scoreBS = 0;   // max 20 (10 x 2)
-            let scorePGK = 0;  // max 20 (5 x 4)
+            let scorePG = 0;
+            let scoreBS = 0;
+            let scorePGK = 0;
 
             questions.forEach(q => {
                 const userAns = userAnswers[q.id];
 
                 if (q.type === 'PG') {
-                    if (userAns === q.answer) {
-                        scorePG += q.points;
-                    }
+                    if (userAns === q.answer) scorePG += q.points;
                 } else if (q.type === 'BS') {
-                    if (userAns === q.answer) {
-                        scoreBS += q.points;
-                    }
+                    if (userAns === q.answer) scoreBS += q.points;
                 } else if (q.type === 'PGK') {
                     if (Array.isArray(userAns)) {
                         const sortedUser = [...userAns].sort().join('');
                         const sortedKey = [...q.answer].sort().join('');
-                        if (sortedUser === sortedKey) {
-                            scorePGK += q.points;
-                        }
+                        if (sortedUser === sortedKey) scorePGK += q.points;
                     }
                 }
             });
 
             const totalScore = scorePG + scoreBS + scorePGK;
-            const scoresObj = {
-                scorePG,
-                scoreBS,
-                scorePGK,
-                totalScore
-            };
+            const scoresObj = { scorePG, scoreBS, scorePGK, totalScore };
 
-            // Save Attempt to localStorage
             const attemptData = {
                 studentData,
                 userAnswers,
@@ -1443,50 +1425,48 @@
             };
             localStorage.setItem(STORAGE_KEY, JSON.stringify(attemptData));
 
-            // Sync to Supabase Cloud Database
             saveSubmissionToCloud(scoresObj);
-
             showResults(scoresObj);
         }
 
         async function saveSubmissionToCloud(scoresObj) {
-            if (!supabase) return;
+            if (!supabaseClient) return;
 
             try {
                 const docId = `${studentData.class}_${studentData.no}_${studentData.name.replace(/\s+/g, '_').toLowerCase()}`;
+                
+                const payload = {
+                    id: docId,
+                    student_data: studentData,
+                    user_answers: userAnswers,
+                    scores: scoresObj,
+                    submitted_at: new Date().toISOString()
+                };
 
-                const { error } = await supabase
+                const { error } = await supabaseClient
                     .from('submissions')
-                    .upsert({
-                        id: docId,
-                        docId: docId,
-                        studentData: studentData,
-                        userAnswers: userAnswers,
-                        scores: scoresObj,
-                        submittedAt: new Date().toISOString()
-                    });
+                    .upsert(payload, { onConflict: 'id' });
 
                 if (error) {
-                    console.error("Penyimpanan ke Supabase gagal:", error);
+                    console.error("Gagal simpan ke Supabase:", error);
                 }
             } catch (err) {
-                console.error("Penyimpanan ke Supabase gagal:", err);
+                console.error("Cloud save failed:", err);
             }
         }
 
         /* ==========================================================================
-           7. RESULTS & PEMBAHASAN RENDERING
+           7. RESULTS & PEMBAHASAN DISPLAY
            ========================================================================== */
         function showResults(scores) {
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-exam').classList.add('hidden');
             document.getElementById('screen-teacher').classList.add('hidden');
-            document.getElementById('timer-box').classList.add('hidden');
             document.getElementById('screen-result').classList.remove('hidden');
 
             document.getElementById('result-student-info').textContent = 
-                `Nama: ${studentData.name} | Kelas: ${studentData.class} | Absen: ${studentData.no}`;
-            
+                `Nama: ${studentData.name || '-'} | Kelas: ${studentData.class || '-'} | Absen: ${studentData.no || '-'}`;
+
             document.getElementById('final-score-text').textContent = scores.totalScore || 0;
             document.getElementById('score-pg').textContent = `${scores.scorePG || 0} / 60`;
             document.getElementById('score-bs').textContent = `${scores.scoreBS || 0} / 20`;
@@ -1497,7 +1477,7 @@
                 badge.textContent = "TUNTAS KKM";
                 badge.className = "inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500 text-white shadow-sm";
             } else {
-                badge.textContent = "BELUM TUNTAS (REMIDIAL)";
+                badge.textContent = "REMIDI";
                 badge.className = "inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-500 text-white shadow-sm";
             }
 
@@ -1505,75 +1485,56 @@
         }
 
         function renderPembahasan() {
-            const list = document.getElementById('pembahasan-list');
-            list.innerHTML = '';
+            const container = document.getElementById('pembahasan-list');
+            container.innerHTML = '';
 
-            questions.forEach(q => {
-                const userAns = userAnswers[q.id];
+            questions.forEach((q) => {
+                const uAns = userAnswers[q.id];
                 let isCorrect = false;
 
                 if (q.type === 'PG' || q.type === 'BS') {
-                    isCorrect = userAns === q.answer;
+                    isCorrect = uAns === q.answer;
                 } else if (q.type === 'PGK') {
-                    if (Array.isArray(userAns)) {
-                        isCorrect = [...userAns].sort().join('') === [...q.answer].sort().join('');
+                    if (Array.isArray(uAns)) {
+                        const sUser = [...uAns].sort().join('');
+                        const sKey = [...q.answer].sort().join('');
+                        isCorrect = sUser === sKey;
                     }
                 }
 
                 const card = document.createElement('div');
-                card.className = `bg-white rounded-2xl border ${isCorrect ? 'border-emerald-200 shadow-sm' : 'border-rose-200 shadow-sm'} p-5 md:p-6 space-y-3`;
+                card.className = `p-5 rounded-2xl border bg-white shadow-sm space-y-3 ${isCorrect ? 'border-emerald-200' : 'border-rose-200'}`;
 
-                let userAnsDisplay = 'Tidak dijawab';
-                if (userAns) {
-                    if (Array.isArray(userAns)) {
-                        userAnsDisplay = userAns.length > 0 ? userAns.sort().join(', ') : 'Tidak dijawab';
-                    } else {
-                        userAnsDisplay = userAns;
-                    }
+                let userAnsDisplay = '-';
+                if (Array.isArray(uAns)) {
+                    userAnsDisplay = uAns.length > 0 ? uAns.sort().join(', ') : 'Tidak Dijawab';
+                } else if (uAns) {
+                    userAnsDisplay = uAns;
+                } else {
+                    userAnsDisplay = 'Tidak Dijawab';
                 }
 
-                let keyAnsDisplay = Array.isArray(q.answer) ? q.answer.sort().join(', ') : q.answer;
+                let keyDisplay = Array.isArray(q.answer) ? q.answer.sort().join(', ') : q.answer;
 
                 card.innerHTML = `
-                    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                        <span class="text-xs font-bold ${isCorrect ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50'} px-2.5 py-1 rounded-md">
-                            Soal #${q.id} (${q.section})
-                        </span>
-                        <span class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">
-                            ${isCorrect ? '<i class="fa-solid fa-circle-check mr-1"></i>Benar (+' + q.points + ')' : '<i class="fa-solid fa-circle-xmark mr-1"></i>Salah (0)'}
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <span class="font-bold text-sm text-slate-800">Soal #${q.id} (${q.section})</span>
+                        <span class="px-2.5 py-0.5 rounded text-xs font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                            ${isCorrect ? 'BENAR (+' + q.points + ')' : 'SALAH (+0)'}
                         </span>
                     </div>
-
-                    <div class="text-xs md:text-sm text-slate-800 leading-relaxed">${q.question}</div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs pt-1">
-                        <div class="p-2.5 rounded-lg ${isCorrect ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-rose-50 border border-rose-200 text-rose-900'}">
-                            <strong>Jawaban Anda:</strong> ${userAnsDisplay}
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-900">
-                            <strong>Kunci Jawaban:</strong> ${keyAnsDisplay}
-                        </div>
+                    <div class="text-xs md:text-sm text-slate-700 leading-relaxed">${q.question}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <div><span class="text-slate-500 font-medium">Jawaban Anda:</span> <strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${userAnsDisplay}</strong></div>
+                        <div><span class="text-slate-500 font-medium">Kunci Jawaban:</span> <strong class="text-teal-700">${keyDisplay}</strong></div>
                     </div>
-
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs text-slate-700 leading-relaxed">
-                        <strong class="text-teal-800 block mb-1"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i>Pembahasan:</strong>
+                    <div class="text-xs text-slate-600 bg-amber-50/60 p-3 rounded-lg border border-amber-200/60">
+                        <strong class="text-amber-900 block mb-1"><i class="fa-solid fa-lightbulb mr-1"></i>Pembahasan:</strong>
                         ${q.pembahasan}
                     </div>
                 `;
-
-                list.appendChild(card);
+                container.appendChild(card);
             });
-        }
-
-        function promptResetExam() {
-            const pwd = prompt("Masukkan Kata Sandi Guru untuk mereset ujian pada perangkat ini:");
-            if (pwd === TEACHER_PASSWORD_KEY || pwd === "guru123" || pwd === "GURU123") {
-                localStorage.removeItem(STORAGE_KEY);
-                alert("Ujian berhasil direset. Halaman akan dimuat ulang.");
-                window.location.reload();
-            } else if (pwd !== null) {
-                alert("Kata sandi salah!");
-            }
         }
 
         /* ==========================================================================
@@ -1585,8 +1546,7 @@
             } else {
                 document.getElementById('modal-teacher-auth').classList.remove('hidden');
                 document.getElementById('input-teacher-pwd').value = '';
-                const errEl = document.getElementById('teacher-auth-error');
-                if (errEl) errEl.classList.add('hidden');
+                document.getElementById('teacher-auth-error').classList.add('hidden');
             }
         }
 
@@ -1596,20 +1556,15 @@
 
         function verifyTeacherPassword(e) {
             e.preventDefault();
-            const pwdInput = document.getElementById('input-teacher-pwd').value;
-            const errEl = document.getElementById('teacher-auth-error');
-
-            if (pwdInput === TEACHER_PASSWORD_KEY || pwdInput === "guru123" || pwdInput === "GURU123") {
+            const input = document.getElementById('input-teacher-pwd').value;
+            if (input === TEACHER_PASSWORD_KEY || input === "guru123" || input === "GURU123") {
                 isTeacherLoggedIn = true;
                 closeTeacherAuthModal();
                 showTeacherDashboardScreen();
             } else {
-                if (errEl) {
-                    errEl.textContent = 'Kata sandi salah! Silakan coba lagi.';
-                    errEl.classList.remove('hidden');
-                } else {
-                    alert('Kata sandi salah!');
-                }
+                const err = document.getElementById('teacher-auth-error');
+                err.textContent = "Kata sandi salah! Gunakan kata sandi guru yang tepat.";
+                err.classList.remove('hidden');
             }
         }
 
@@ -1617,206 +1572,170 @@
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-exam').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('timer-box').classList.add('hidden');
+            
             document.getElementById('screen-teacher').classList.remove('hidden');
             renderTeacherDashboard();
         }
 
         function closeTeacherDashboard() {
             document.getElementById('screen-teacher').classList.add('hidden');
-            if (studentData.name) {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    showResults(data.scores);
-                } else {
-                    document.getElementById('screen-exam').classList.remove('hidden');
-                    document.getElementById('screen-exam').classList.add('grid');
-                }
-            } else {
-                document.getElementById('screen-start').classList.remove('hidden');
-            }
+            document.getElementById('screen-start').classList.remove('hidden');
         }
 
         function renderTeacherDashboard() {
-            const filterClass = document.getElementById('filter-class').value;
+            if (!isTeacherLoggedIn) return;
+
+            const selectedClass = document.getElementById('filter-class').value;
             const sortOrder = document.getElementById('sort-order').value;
-            const searchVal = document.getElementById('search-student').value.toLowerCase().trim();
+            const searchQuery = document.getElementById('search-student').value.toLowerCase().trim();
 
-            let filtered = [...allSubmissions];
+            let filtered = allSubmissions.filter(s => {
+                if (!s.studentData) return false;
+                const matchClass = selectedClass === 'ALL' || s.studentData.class === selectedClass;
+                const matchSearch = s.studentData.name.toLowerCase().includes(searchQuery) ||
+                                    s.studentData.no.toString().includes(searchQuery);
+                return matchClass && matchSearch;
+            });
 
-            // Filter Kelas
-            if (filterClass !== 'ALL') {
-                filtered = filtered.filter(s => s.studentData && s.studentData.class === filterClass);
-            }
+            filtered.sort((a, b) => {
+                if (sortOrder === 'NEWEST') {
+                    return new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0);
+                } else if (sortOrder === 'SCORE_DESC') {
+                    return (b.scores?.totalScore || 0) - (a.scores?.totalScore || 0);
+                } else if (sortOrder === 'SCORE_ASC') {
+                    return (a.scores?.totalScore || 0) - (b.scores?.totalScore || 0);
+                } else if (sortOrder === 'NAME_ASC') {
+                    return (a.studentData?.name || '').localeCompare(b.studentData?.name || '');
+                }
+                return 0;
+            });
 
-            // Search Name / Absen
-            if (searchVal) {
-                filtered = filtered.filter(s => {
-                    if (!s.studentData) return false;
-                    const nameMatch = (s.studentData.name || '').toLowerCase().includes(searchVal);
-                    const noMatch = (s.studentData.no || '').toString().includes(searchVal);
-                    return nameMatch || noMatch;
-                });
-            }
-
-            // Sorting
-            if (sortOrder === 'NEWEST') {
-                filtered.sort((a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0));
-            } else if (sortOrder === 'SCORE_DESC') {
-                filtered.sort((a, b) => (b.scores?.totalScore || 0) - (a.scores?.totalScore || 0));
-            } else if (sortOrder === 'SCORE_ASC') {
-                filtered.sort((a, b) => (a.scores?.totalScore || 0) - (b.scores?.totalScore || 0));
-            } else if (sortOrder === 'NAME_ASC') {
-                filtered.sort((a, b) => (a.studentData?.name || '').localeCompare(b.studentData?.name || ''));
-            }
-
-            // Render Stats
-            const totalCount = filtered.length;
-            let avgScore = 0;
+            const total = filtered.length;
+            let sumScore = 0;
             let passedCount = 0;
-            let minScore = 100;
+            let minScore = total > 0 ? 100 : 0;
             let maxScore = 0;
 
-            if (totalCount > 0) {
-                let sum = 0;
-                filtered.forEach(s => {
-                    const sc = s.scores?.totalScore || 0;
-                    sum += sc;
-                    if (sc >= 75) passedCount++;
-                    if (sc < minScore) minScore = sc;
-                    if (sc > maxScore) maxScore = sc;
-                });
-                avgScore = (sum / totalCount).toFixed(1);
-            } else {
-                minScore = 0;
-                maxScore = 0;
-            }
+            filtered.forEach(s => {
+                const score = s.scores?.totalScore || 0;
+                sumScore += score;
+                if (score >= 75) passedCount++;
+                if (score > maxScore) maxScore = score;
+                if (score < minScore) minScore = score;
+            });
 
-            document.getElementById('stat-total-students').textContent = totalCount;
+            const avgScore = total > 0 ? (sumScore / total).toFixed(1) : '0';
+
+            document.getElementById('stat-total-students').textContent = total;
             document.getElementById('stat-avg-score').textContent = avgScore;
-            document.getElementById('stat-passed-students').textContent = passedCount;
-            document.getElementById('stat-min-max').textContent = `${minScore} / ${maxScore}`;
+            document.getElementById('stat-passed-students').textContent = `${passedCount} (${total > 0 ? Math.round((passedCount/total)*100) : 0}%)`;
+            document.getElementById('stat-min-max').textContent = `${maxScore} / ${total > 0 ? minScore : 0}`;
 
-            // Render Table
             const tbody = document.getElementById('teacher-table-body');
             tbody.innerHTML = '';
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="11" class="text-center py-6 text-slate-400">Belum ada data siswa yang sesuai.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="11" class="text-center py-8 text-slate-400">Belum ada data siswa yang sesuai filter.</td></tr>`;
                 return;
             }
 
             filtered.forEach((sub, idx) => {
+                const score = sub.scores?.totalScore || 0;
+                const isPassed = score >= 75;
+                const submittedDate = sub.submittedAt ? new Date(sub.submittedAt).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '-';
+
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
-
-                const st = sub.studentData || {};
-                const sc = sub.scores || {};
-                const isPassed = (sc.totalScore || 0) >= 75;
-                const dateStr = sub.submittedAt ? new Date(sub.submittedAt).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }) : '-';
-
                 tr.innerHTML = `
-                    <td class="p-3.5 text-center font-bold text-slate-500">${idx + 1}</td>
-                    <td class="p-3.5 font-bold text-slate-800">${st.name || '-'}</td>
-                    <td class="p-3.5"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-semibold">${st.class || '-'}</span></td>
-                    <td class="p-3.5 text-center font-semibold">${st.no || '-'}</td>
-                    <td class="p-3.5 text-center text-slate-600">${sc.scorePG || 0}</td>
-                    <td class="p-3.5 text-center text-slate-600">${sc.scoreBS || 0}</td>
-                    <td class="p-3.5 text-center text-slate-600">${sc.scorePGK || 0}</td>
-                    <td class="p-3.5 text-center font-black text-sm ${isPassed ? 'text-teal-700' : 'text-rose-600'}">${sc.totalScore || 0}</td>
-                    <td class="p-3.5 text-center">
-                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isPassed ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                    <td class="p-3 text-center font-bold text-slate-400">${idx + 1}</td>
+                    <td class="p-3 font-semibold text-slate-800">${sub.studentData?.name || '-'}</td>
+                    <td class="p-3"><span class="bg-slate-100 text-slate-700 font-medium px-2 py-0.5 rounded">${sub.studentData?.class || '-'}</span></td>
+                    <td class="p-3 text-center font-semibold text-slate-600">${sub.studentData?.no || '-'}</td>
+                    <td class="p-3 text-center text-slate-600">${sub.scores?.scorePG || 0}</td>
+                    <td class="p-3 text-center text-slate-600">${sub.scores?.scoreBS || 0}</td>
+                    <td class="p-3 text-center text-slate-600">${sub.scores?.scorePGK || 0}</td>
+                    <td class="p-3 text-center font-black text-sm text-teal-800">${score}</td>
+                    <td class="p-3 text-center">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase ${isPassed ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
                             ${isPassed ? 'TUNTAS' : 'REMIDI'}
                         </span>
                     </td>
-                    <td class="p-3.5 text-slate-500 text-[11px]">${dateStr}</td>
-                    <td class="p-3.5 text-center">
-                        <div class="flex items-center justify-center gap-1.5">
-                            <button onclick="showStudentDetailModal('${sub.id}')" class="px-2 py-1 bg-teal-100 hover:bg-teal-200 text-teal-800 rounded font-semibold text-[11px] transition" title="Lihat Detail Jawaban">
-                                <i class="fa-solid fa-eye"></i> Detail
-                            </button>
-                            <button onclick="deleteStudentSubmission('${sub.id}')" class="px-2 py-1 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded font-semibold text-[11px] transition" title="Hapus Data">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
+                    <td class="p-3 text-slate-500">${submittedDate} WIB</td>
+                    <td class="p-3 text-center space-x-1">
+                        <button onclick="showStudentDetailModal('${sub.docId}')" class="px-2 py-1 bg-teal-100 hover:bg-teal-200 text-teal-800 rounded font-bold text-[11px] transition">
+                            <i class="fa-solid fa-eye mr-1"></i> Detail
+                        </button>
+                        <button onclick="deleteStudentSubmission('${sub.docId}', '${sub.studentData?.name}')" class="px-2 py-1 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded font-bold text-[11px] transition">
+                            <i class="fa-solid fa-trash mr-1"></i> Hapus
+                        </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        async function deleteStudentSubmission(docId) {
-            if (!confirm("Apakah Anda yakin ingin menghapus data hasil ujian siswa ini?")) return;
+        async function deleteStudentSubmission(docId, name) {
+            if (!confirm(`Apakah Anda yakin ingin menghapus data ujian siswa ${name || ''}?`)) return;
 
-            if (supabase) {
-                const { error } = await supabase.from('submissions').delete().eq('id', docId);
-                if (error) {
-                    alert("Gagal menghapus data dari Supabase: " + error.message);
-                    return;
+            try {
+                if (supabaseClient) {
+                    const { error } = await supabaseClient
+                        .from('submissions')
+                        .delete()
+                        .eq('id', docId);
+
+                    if (error) {
+                        alert('Gagal menghapus data: ' + error.message);
+                    } else {
+                        alert('Data berhasil dihapus.');
+                        fetchSubmissions();
+                    }
                 }
+            } catch (err) {
+                console.error("Delete failed:", err);
             }
-            
-            allSubmissions = allSubmissions.filter(s => s.id !== docId);
-            renderTeacherDashboard();
-            alert("Data siswa berhasil dihapus.");
         }
 
         function showStudentDetailModal(docId) {
-            const sub = allSubmissions.find(s => s.id === docId);
+            const sub = allSubmissions.find(s => s.docId === docId);
             if (!sub) return;
 
-            const st = sub.studentData || {};
-            const sc = sub.scores || {};
+            document.getElementById('detail-student-title').textContent = `${sub.studentData?.name || '-'} (${sub.studentData?.class || '-'} / Absen ${sub.studentData?.no || '-'})`;
+            document.getElementById('detail-student-score').textContent = `Total Skor: ${sub.scores?.totalScore || 0} / 100`;
 
-            document.getElementById('detail-student-title').textContent = `Detail Jawaban: ${st.name || '-'} (${st.class || '-'} / Absen ${st.no || '-'})`;
-            document.getElementById('detail-student-score').textContent = `Total Skor: ${sc.totalScore || 0} / 100 (PG: ${sc.scorePG || 0}, B/S: ${sc.scoreBS || 0}, PGK: ${sc.scorePGK || 0})`;
-
-            const container = document.getElementById('detail-student-body');
-            container.innerHTML = '';
-
-            const answers = sub.userAnswers || {};
+            const body = document.getElementById('detail-student-body');
+            body.innerHTML = '';
 
             questions.forEach(q => {
-                const userAns = answers[q.id];
+                const uAns = sub.userAnswers ? sub.userAnswers[q.id] : null;
                 let isCorrect = false;
 
                 if (q.type === 'PG' || q.type === 'BS') {
-                    isCorrect = userAns === q.answer;
+                    isCorrect = uAns === q.answer;
                 } else if (q.type === 'PGK') {
-                    if (Array.isArray(userAns)) {
-                        isCorrect = [...userAns].sort().join('') === [...q.answer].sort().join('');
+                    if (Array.isArray(uAns)) {
+                        isCorrect = [...uAns].sort().join('') === [...q.answer].sort().join('');
                     }
                 }
 
-                let userAnsDisplay = 'Tidak dijawab';
-                if (userAns) {
-                    if (Array.isArray(userAns)) {
-                        userAnsDisplay = userAns.length > 0 ? userAns.sort().join(', ') : 'Tidak dijawab';
-                    } else {
-                        userAnsDisplay = userAns;
-                    }
-                }
+                let uDisplay = Array.isArray(uAns) ? (uAns.join(', ') || '-') : (uAns || '-');
+                let kDisplay = Array.isArray(q.answer) ? q.answer.join(', ') : q.answer;
 
-                let keyAnsDisplay = Array.isArray(q.answer) ? q.answer.sort().join(', ') : q.answer;
-
-                const item = document.createElement('div');
-                item.className = `p-3 rounded-xl border text-xs ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-rose-50/50 border-rose-200'}`;
-                item.innerHTML = `
-                    <div class="flex justify-between font-bold mb-1">
-                        <span>Soal #${q.id} (${q.section})</span>
-                        <span class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${isCorrect ? 'BENAR (+' + q.points + ')' : 'SALAH (0)'}</span>
+                const div = document.createElement('div');
+                div.className = "p-3 rounded-xl border text-xs bg-slate-50 space-y-1";
+                div.innerHTML = `
+                    <div class="flex justify-between font-bold">
+                        <span>Soal #${q.id} [${q.type}]</span>
+                        <span class="${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">${isCorrect ? 'BENAR' : 'SALAH'}</span>
                     </div>
-                    <div class="text-slate-800 mb-2 leading-relaxed">${q.question}</div>
-                    <div class="grid grid-cols-2 gap-2 text-[11px] font-medium">
-                        <div class="p-1.5 rounded bg-white/80 border border-slate-200">
-                            <span class="text-slate-500">Jawaban Siswa:</span> <span class="font-bold ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${userAnsDisplay}</span>
-                        </div>
-                        <div class="p-1.5 rounded bg-white/80 border border-slate-200">
-                            <span class="text-slate-500">Kunci Jawaban:</span> <span class="font-bold text-teal-700">${keyAnsDisplay}</span>
-                        </div>
+                    <div class="text-slate-600">${q.question.replace(/<[^>]*>?/gm, ' ').substring(0, 100)}...</div>
+                    <div class="flex gap-4 pt-1">
+                        <span>Jawaban Siswa: <strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${uDisplay}</strong></span>
+                        <span>Kunci: <strong class="text-teal-700">${kDisplay}</strong></span>
                     </div>
                 `;
-                container.appendChild(item);
+                body.appendChild(div);
             });
 
             document.getElementById('modal-student-detail').classList.remove('hidden');
@@ -1828,36 +1747,44 @@
 
         function exportTeacherDataToCSV() {
             if (!allSubmissions || allSubmissions.length === 0) {
-                alert("Belum ada data pengerjaan siswa untuk diekspor!");
+                alert('Belum ada data pengerjaan untuk diekspor!');
                 return;
             }
 
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "No,Nama Siswa,Kelas,Nomor Absen,Skor PG,Skor BS,Skor PGK,Total Skor,Status,Waktu Selesai\n";
+            let csvContent = "data:text/csv;charset=utf-8,No,Nama,Kelas,Absen,Skor PG,Skor BS,Skor PGK,Total Skor,Status,Waktu Selesai\n";
 
             allSubmissions.forEach((sub, idx) => {
-                const st = sub.studentData || {};
-                const sc = sub.scores || {};
-                const name = `"${(st.name || '').replace(/"/g, '""')}"`;
-                const cls = `"${st.class || ''}"`;
-                const no = st.no || '';
-                const pg = sc.scorePG || 0;
-                const bs = sc.scoreBS || 0;
-                const pgk = sc.scorePGK || 0;
-                const total = sc.totalScore || 0;
-                const status = total >= 75 ? "TUNTAS" : "REMIDI";
-                const date = sub.submittedAt ? `"${new Date(sub.submittedAt).toLocaleString('id-ID')}"` : '""';
+                const name = `"${(sub.studentData?.name || '').replace(/"/g, '""')}"`;
+                const cls = sub.studentData?.class || '';
+                const no = sub.studentData?.no || '';
+                const pg = sub.scores?.scorePG || 0;
+                const bs = sub.scores?.scoreBS || 0;
+                const pgk = sub.scores?.scorePGK || 0;
+                const total = sub.scores?.totalScore || 0;
+                const status = total >= 75 ? 'TUNTAS' : 'REMIDI';
+                const time = sub.submittedAt ? new Date(sub.submittedAt).toLocaleString('id-ID') : '';
 
-                csvContent += `${idx + 1},${name},${cls},${no},${pg},${bs},${pgk},${total},${status},${date}\n`;
+                csvContent += `${idx + 1},${name},${cls},${no},${pg},${bs},${pgk},${total},${status},"${time}"\n`;
             });
 
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `Rekap_Nilai_Biologi_XI_${new Date().toISOString().slice(0,10)}.csv`);
+            link.setAttribute("download", `Hasil_Ulangan_Biologi_XI_${new Date().toISOString().slice(0,10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        function promptResetExam() {
+            const pwd = prompt("Masukkan Kata Sandi Guru untuk meriset pengerjaan ujian siswa ini:");
+            if (pwd === "guru123" || pwd === "GURU123") {
+                localStorage.removeItem(STORAGE_KEY);
+                alert("Pengerjaan ujian berhasil diriset. Halaman akan dimuat ulang.");
+                location.reload();
+            } else if (pwd !== null) {
+                alert("Kata sandi salah!");
+            }
         }
     </script>
 </body>
